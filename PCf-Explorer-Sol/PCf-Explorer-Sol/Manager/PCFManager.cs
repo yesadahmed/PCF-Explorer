@@ -128,8 +128,12 @@ namespace PCf_Explorer_Sol.Manager
 				result = true;
 			else if (name.Contains("ForecastingControls.FieldControls.ParticipatingRecordControl"))
 				result = true;
+			else if (name.Contains("MicrosoftDynamicsScheduling"))
+				result = true;
+			else if (name.Contains("MicrosoftDynamicsFPS"))
+				result = true;
 
-			
+
 			return result;
 
 		}
