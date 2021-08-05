@@ -85,7 +85,7 @@ namespace PCf_Explorer_Sol
 			this.maintbllayout.ColumnCount = 4;
 			this.maintbllayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.53412F));
 			this.maintbllayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.46588F));
-			this.maintbllayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 730F));
+			this.maintbllayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 666F));
 			this.maintbllayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.maintbllayout.Controls.Add(this.listViewPCF, 0, 1);
 			this.maintbllayout.Controls.Add(this.tableLayoutPanelinner, 1, 1);
@@ -107,25 +107,26 @@ namespace PCf_Explorer_Sol
 			this.listViewPCF.HideSelection = false;
 			this.listViewPCF.Location = new System.Drawing.Point(3, 67);
 			this.listViewPCF.Name = "listViewPCF";
-			this.listViewPCF.Size = new System.Drawing.Size(772, 1398);
+			this.listViewPCF.Size = new System.Drawing.Size(796, 1398);
 			this.listViewPCF.TabIndex = 0;
 			this.listViewPCF.UseCompatibleStateImageBehavior = false;
+			this.listViewPCF.SelectedIndexChanged += new System.EventHandler(this.listViewPCF_SelectedIndexChanged);
 			// 
 			// tableLayoutPanelinner
 			// 
 			this.tableLayoutPanelinner.ColumnCount = 2;
-			this.tableLayoutPanelinner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.56923F));
-			this.tableLayoutPanelinner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.43077F));
+			this.tableLayoutPanelinner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.48642F));
+			this.tableLayoutPanelinner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.51358F));
 			this.tableLayoutPanelinner.Controls.Add(this.chartpie, 1, 0);
 			this.tableLayoutPanelinner.Controls.Add(this.chart1, 1, 1);
 			this.tableLayoutPanelinner.Controls.Add(this.listViewDetails, 0, 0);
 			this.tableLayoutPanelinner.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanelinner.Location = new System.Drawing.Point(781, 67);
+			this.tableLayoutPanelinner.Location = new System.Drawing.Point(805, 67);
 			this.tableLayoutPanelinner.Name = "tableLayoutPanelinner";
 			this.tableLayoutPanelinner.RowCount = 2;
 			this.tableLayoutPanelinner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.34319F));
 			this.tableLayoutPanelinner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.65681F));
-			this.tableLayoutPanelinner.Size = new System.Drawing.Size(1289, 1398);
+			this.tableLayoutPanelinner.Size = new System.Drawing.Size(1329, 1398);
 			this.tableLayoutPanelinner.TabIndex = 1;
 			// 
 			// chartpie
@@ -136,14 +137,14 @@ namespace PCf_Explorer_Sol
 			this.chartpie.Dock = System.Windows.Forms.DockStyle.Fill;
 			legend3.Name = "Legend1";
 			this.chartpie.Legends.Add(legend3);
-			this.chartpie.Location = new System.Drawing.Point(616, 3);
+			this.chartpie.Location = new System.Drawing.Point(766, 3);
 			this.chartpie.Name = "chartpie";
 			series3.ChartArea = "ChartArea1";
 			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
 			series3.Legend = "Legend1";
 			series3.Name = "Series1";
 			this.chartpie.Series.Add(series3);
-			this.chartpie.Size = new System.Drawing.Size(670, 725);
+			this.chartpie.Size = new System.Drawing.Size(560, 725);
 			this.chartpie.TabIndex = 0;
 			this.chartpie.Text = "chart1";
 			// 
@@ -154,7 +155,7 @@ namespace PCf_Explorer_Sol
 			this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
 			legend4.Name = "Legend1";
 			this.chart1.Legends.Add(legend4);
-			this.chart1.Location = new System.Drawing.Point(616, 734);
+			this.chart1.Location = new System.Drawing.Point(766, 734);
 			this.chart1.Name = "chart1";
 			this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
 			series4.ChartArea = "ChartArea1";
@@ -162,7 +163,7 @@ namespace PCf_Explorer_Sol
 			series4.Legend = "Legend1";
 			series4.Name = "Series1";
 			this.chart1.Series.Add(series4);
-			this.chart1.Size = new System.Drawing.Size(670, 661);
+			this.chart1.Size = new System.Drawing.Size(560, 661);
 			this.chart1.TabIndex = 1;
 			this.chart1.Text = "chartinfo";
 			// 
@@ -178,14 +179,14 @@ namespace PCf_Explorer_Sol
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 58);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(796, 58);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
 			// txtsearch
 			// 
 			this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtsearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtsearch.Location = new System.Drawing.Point(241, 6);
+			this.txtsearch.Location = new System.Drawing.Point(265, 6);
 			this.txtsearch.Name = "txtsearch";
 			this.txtsearch.Size = new System.Drawing.Size(528, 45);
 			this.txtsearch.TabIndex = 0;
@@ -196,9 +197,9 @@ namespace PCf_Explorer_Sol
 			this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(15, 0);
+			this.label1.Location = new System.Drawing.Point(8, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(220, 58);
+			this.label1.Size = new System.Drawing.Size(251, 58);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Search control and press enter:   ";
 			// 
@@ -220,7 +221,7 @@ namespace PCf_Explorer_Sol
 			this.listViewDetails.Location = new System.Drawing.Point(3, 3);
 			this.listViewDetails.Name = "listViewDetails";
 			this.tableLayoutPanelinner.SetRowSpan(this.listViewDetails, 2);
-			this.listViewDetails.Size = new System.Drawing.Size(607, 1392);
+			this.listViewDetails.Size = new System.Drawing.Size(757, 1392);
 			this.listViewDetails.TabIndex = 2;
 			this.listViewDetails.UseCompatibleStateImageBehavior = false;
 			// 
@@ -241,14 +242,14 @@ namespace PCf_Explorer_Sol
 			this.tableLayoutPanelListboxes.Controls.Add(this.listBox1, 0, 1);
 			this.tableLayoutPanelListboxes.Controls.Add(this.listBox2, 0, 3);
 			this.tableLayoutPanelListboxes.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanelListboxes.Location = new System.Drawing.Point(2076, 67);
+			this.tableLayoutPanelListboxes.Location = new System.Drawing.Point(2140, 67);
 			this.tableLayoutPanelListboxes.Name = "tableLayoutPanelListboxes";
 			this.tableLayoutPanelListboxes.RowCount = 4;
 			this.tableLayoutPanelListboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.976744F));
 			this.tableLayoutPanelListboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.02325F));
 			this.tableLayoutPanelListboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
 			this.tableLayoutPanelListboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 593F));
-			this.tableLayoutPanelListboxes.Size = new System.Drawing.Size(724, 1398);
+			this.tableLayoutPanelListboxes.Size = new System.Drawing.Size(660, 1398);
 			this.tableLayoutPanelListboxes.TabIndex = 4;
 			// 
 			// comboBoxtotal
@@ -261,7 +262,7 @@ namespace PCf_Explorer_Sol
             "Dataset"});
 			this.comboBoxtotal.Location = new System.Drawing.Point(3, 5);
 			this.comboBoxtotal.Name = "comboBoxtotal";
-			this.comboBoxtotal.Size = new System.Drawing.Size(718, 39);
+			this.comboBoxtotal.Size = new System.Drawing.Size(654, 39);
 			this.comboBoxtotal.TabIndex = 0;
 			this.comboBoxtotal.SelectedIndexChanged += new System.EventHandler(this.comboBoxtotal_SelectedIndexChanged);
 			// 
@@ -275,7 +276,7 @@ namespace PCf_Explorer_Sol
             "Microsoft"});
 			this.comboBoxcustom.Location = new System.Drawing.Point(3, 748);
 			this.comboBoxcustom.Name = "comboBoxcustom";
-			this.comboBoxcustom.Size = new System.Drawing.Size(718, 39);
+			this.comboBoxcustom.Size = new System.Drawing.Size(654, 39);
 			this.comboBoxcustom.TabIndex = 1;
 			this.comboBoxcustom.SelectedIndexChanged += new System.EventHandler(this.comboBoxcustom_SelectedIndexChanged);
 			// 
@@ -286,7 +287,7 @@ namespace PCf_Explorer_Sol
 			this.listBox1.ItemHeight = 31;
 			this.listBox1.Location = new System.Drawing.Point(3, 54);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(718, 676);
+			this.listBox1.Size = new System.Drawing.Size(654, 676);
 			this.listBox1.TabIndex = 2;
 			// 
 			// listBox2
@@ -296,7 +297,7 @@ namespace PCf_Explorer_Sol
 			this.listBox2.ItemHeight = 31;
 			this.listBox2.Location = new System.Drawing.Point(3, 807);
 			this.listBox2.Name = "listBox2";
-			this.listBox2.Size = new System.Drawing.Size(718, 588);
+			this.listBox2.Size = new System.Drawing.Size(654, 588);
 			this.listBox2.TabIndex = 3;
 			// 
 			// MyPluginControl

@@ -198,6 +198,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CRMFormModel.cs" />
     <Compile Include="Models\PCFClientJsonModel.cs" />
     <Compile Include="Manager\PCFManager.cs" />
     <Compile Include="Models\PCFModel.cs" />
