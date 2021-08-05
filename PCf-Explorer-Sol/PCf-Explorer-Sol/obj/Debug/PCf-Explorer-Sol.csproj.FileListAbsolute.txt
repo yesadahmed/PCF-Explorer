@@ -164,4 +164,3 @@ C:\Users\adsa\source\repos\Git\PCF-Explorer\PCf-Explorer-Sol\PCf-Explorer-Sol\ob
 C:\Users\adsa\source\repos\Git\PCF-Explorer\PCf-Explorer-Sol\PCf-Explorer-Sol\obj\Debug\PCf-Explorer-Sol.csproj.CopyComplete
 C:\Users\adsa\source\repos\Git\PCF-Explorer\PCf-Explorer-Sol\PCf-Explorer-Sol\obj\Debug\PCf-Explorer-Sol.dll
 C:\Users\adsa\source\repos\Git\PCF-Explorer\PCf-Explorer-Sol\PCf-Explorer-Sol\obj\Debug\PCf-Explorer-Sol.pdb
-C:\Users\adsa\source\repos\Git\PCF-Explorer\PCf-Explorer-Sol\PCf-Explorer-Sol\obj\Debug\PCf-Explorer-Sol.csproj.AssemblyReference.cache

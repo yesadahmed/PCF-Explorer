@@ -10,6 +10,8 @@ namespace PCf_Explorer_Sol.Models
 	{
 		public string  name { get; set; }
 		public bool IsFieldtype { get; set; }
+
+		public bool DefaultMSControl { get; set; }
 		public Guid solutionid { get; set; }
 
 		public string clientjsonraw { get; set; }

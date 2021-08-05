@@ -38,7 +38,7 @@ namespace PCf_Explorer_Sol.Manager
 				PCFModel pCFModel = null;
 				QueryExpression query = new QueryExpression("customcontrol");
 				query.ColumnSet = new ColumnSet("solutionid", "clientjson", "customcontrolid",
-					"compatibledatatypes", "createdon", "version", "createdby","name");
+					"compatibledatatypes", "createdon", "version", "createdby", "name");
 
 				LinkEntity EntityB = new LinkEntity("customcontrol", "solution", "solutionid", "solutionid", JoinOperator.Inner);
 				EntityB.Columns = new ColumnSet("uniquename");
@@ -64,7 +64,10 @@ namespace PCf_Explorer_Sol.Manager
 					if (!string.IsNullOrWhiteSpace(pCFModel.clientjsonraw))
 						pCFModel.ClientJson = JsonConvert.DeserializeObject<PCFClientJsonModel>(pCFModel.clientjsonraw);
 
-					pCFModel.name= entity.GetAttributeValue<string>("name");
+					pCFModel.name = entity.GetAttributeValue<string>("name");
+
+					pCFModel.DefaultMSControl = IsMicrosftControl(pCFModel.name);
+
 
 					pCFModel.compatibledatatypes = entity.GetAttributeValue<string>("compatibledatatypes");
 					if (pCFModel.compatibledatatypes.ToLower().Equals("grid"))
@@ -99,7 +102,37 @@ namespace PCf_Explorer_Sol.Manager
 
 		#region Private Helpers
 
+		bool IsMicrosftControl(string name)
+		{
+			bool result = false;
 
+			if (name.Contains("MscrmControls"))
+				result = true;
+			else if (name.Contains("MscrmControls."))
+				result = true;
+			else if (name.Contains("msdyn_"))
+				result = true;
+			else if (name.Contains("msfp_"))
+				result = true;
+			else if (name.Contains("msfp_MscrmControls"))
+				result = true;
+			else if (name.Contains("MsdynmktControls"))
+				result = true;
+			else if (name.Contains("MsdynmktControls."))
+				result = true;
+			else if (name.Contains("LinkedInExtensionControls.JQueryHierarchy.JQueryHierarchyControl"))
+				result = true;
+			else if (name.Contains("PlaybookControls.ActivityForm.PBActivityControl"))
+				result = true;
+			else if (name.Contains("Intelligence.BusinessCardReaderControl.BusinessCardReader"))
+				result = true;
+			else if (name.Contains("ForecastingControls.FieldControls.ParticipatingRecordControl"))
+				result = true;
+
+			
+			return result;
+
+		}
 		#endregion
 	}
 }
