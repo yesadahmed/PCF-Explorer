@@ -11,6 +11,7 @@ namespace PCf_Explorer_Sol.Models
 		public string Name { get; set; }
 		public string entity { get; set; }
 		public Guid FormId { get; set; }
+		public string FormType { get; set; }
 	}
 
 

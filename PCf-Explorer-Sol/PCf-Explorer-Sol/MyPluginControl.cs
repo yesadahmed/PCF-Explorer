@@ -429,7 +429,7 @@ namespace PCf_Explorer_Sol
 
 		void LoadDependentPCFControl(ListView.SelectedListViewItemCollection items)
 		{
-			ListGroupDisplyModel lstGroup = null;
+			ListGroupDisplyModel lstGroupForms = null;//mkae PCF hosted forms/Dashboard group
 			ListViewItem itemNew = null;
 			listViewDetails.Clear();
 			PCFClientJsonModel client = null;
@@ -438,10 +438,23 @@ namespace PCf_Explorer_Sol
 			ImageList myImageList = new ImageList();
 			myImageList.ColorDepth = ColorDepth.Depth32Bit;
 			myImageList.Images.Add(
-			  LoadImage("https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/form_transparent.png"));
+			  LoadImage("https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/form_transparent.png"));//0
+
+			myImageList.Images.Add(
+			  LoadImage("https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/gear-64.png"));//1
+
+
+			myImageList.Images.Add(
+			  LoadImage("https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/Hand-80.png"));//2
 			myImageList.ImageSize = new Size(47, 47);
+
+
 			listViewDetails.LargeImageList = myImageList;
 			listViewDetails.View = View.Tile;
+
+			listViewDetails.TileSize = new Size(560, 43);
+			listViewDetails.Columns.AddRange(new ColumnHeader[]
+		  {new ColumnHeader(), new ColumnHeader(), new ColumnHeader()});
 
 
 			foreach (ListViewItem item in items)
@@ -463,8 +476,8 @@ namespace PCf_Explorer_Sol
 
 				if (response != null && response.EntityCollection != null)
 				{
-					lstGroup = new ListGroupDisplyModel();
-					lstGroup.Forms = new List<CRMFormModel>();
+					lstGroupForms = new ListGroupDisplyModel();
+					lstGroupForms.Forms = new List<CRMFormModel>();
 					foreach (var ent in response.EntityCollection.Entities)
 					{
 						var depType = ent.GetAttributeValue<OptionSetValue>("dependentcomponenttype");
@@ -474,13 +487,13 @@ namespace PCf_Explorer_Sol
 						switch (depType.Value)
 						{
 							case 60:
-								if (string.IsNullOrWhiteSpace(lstGroup.GroupName))
-									lstGroup.GroupName = dic[depType.Value];
+								if (string.IsNullOrWhiteSpace(lstGroupForms.GroupName))
+									lstGroupForms.GroupName = dic[depType.Value];
 
 								var formProp = GetformProperties(depCompId);
 								if (formProp != null)
 								{
-									lstGroup.Forms.Add(formProp);
+									lstGroupForms.Forms.Add(formProp);
 								}
 								break;
 
@@ -488,24 +501,78 @@ namespace PCf_Explorer_Sol
 
 					}
 
-					if (lstGroup != null)
+					if (lstGroupForms != null) //Display Forms Group
 					{
-						var grp = new ListViewGroup(lstGroup.GroupName);
+						var grp = new ListViewGroup(lstGroupForms.GroupName);
 						listViewDetails.Groups.Add(grp);
-						listViewDetails.TileSize = new Size(560, 43);
-						listViewDetails.Columns.AddRange(new ColumnHeader[]
-					  {new ColumnHeader(), new ColumnHeader()});
 
-						foreach (var litem in lstGroup.Forms)
+
+						foreach (var litem in lstGroupForms.Forms)
 						{
-							itemNew = new ListViewItem(new string[] { litem.Name, litem.entity }, 0, grp);
+							itemNew = new ListViewItem(new string[] { litem.Name, litem.entity, litem.FormType }, 0, grp);
 
 							listViewDetails.Items.Add(itemNew);
 						}
 
-
+						var grpsol = new ListViewGroup("Solution");
+						listViewDetails.Groups.Add(grpsol);
+						listViewDetails.Items.Add(new ListViewItem(new string[] { client.SolutionName, "IsManaged: " + client.ismanaged, "Version: " + client.version }, 1, grpsol));
 					}
 
+
+					//display properties and later Solution
+					if (client.Properties != null)
+					{
+
+						if (client.Properties.Properties != null)
+						{
+							var grpprop = new ListViewGroup("Properties");
+							listViewDetails.Groups.Add(grpprop);
+							foreach (var prop in client.Properties.Properties)
+							{
+								var _type = prop.TypeGroup != null ? prop.TypeGroup : prop.Type;
+								listViewDetails.Items.Add(new ListViewItem(new string[] { prop.Name, _type, "Required: " + prop.Required }, 2, grpprop));
+
+							}
+						}
+
+
+
+						if (client.Properties.DataSets != null)
+						{
+							string columns = string.Empty;
+							var grpdataset = new ListViewGroup("DataSet");
+							listViewDetails.Groups.Add(grpdataset);
+							foreach (var prop in client.Properties.DataSets)
+							{
+								var _type = prop.TypeGroup != null ? prop.TypeGroup : prop.Type;
+								if (prop.Columns != null && prop.Columns.Count > 0)
+								{
+									string delimiter = ",";
+									columns = string.Join(delimiter, prop.Columns.Select(c => c.Name).ToList());
+
+								}
+
+								listViewDetails.Items.Add(new ListViewItem(new string[] { prop.Name, _type, "Columns: " + columns }, 2, grpdataset));
+
+							}
+						}
+
+						if (client.Properties.Resources != null)
+						{
+							string columns = string.Empty;
+							var grpdataset = new ListViewGroup("Resources");
+							listViewDetails.Groups.Add(grpdataset);
+							foreach (var prop in client.Properties.Resources)
+							{
+								var _type = prop.TypeGroup != null ? prop.TypeGroup : prop.Type;
+								
+								listViewDetails.Items.Add(new ListViewItem(new string[] { prop.Name, "Type: " +_type, "Loadorder: " + prop.LoadOrder }, 2, grpdataset));
+
+							}
+						}
+
+					}
 				}
 			}
 			catch (Exception ex)
@@ -520,7 +587,7 @@ namespace PCf_Explorer_Sol
 		{
 			CRMFormModel cRMFormModel = null;
 
-			var form = ConnectionDetail.ServiceClient.Retrieve("systemform", FormId, new ColumnSet("name", "objecttypecode"));
+			var form = ConnectionDetail.ServiceClient.Retrieve("systemform", FormId, new ColumnSet("name", "objecttypecode", "type"));
 
 			if (form != null)
 			{
@@ -528,11 +595,84 @@ namespace PCf_Explorer_Sol
 				cRMFormModel.FormId = FormId;
 				cRMFormModel.entity = "Entity: " + form.GetAttributeValue<string>("objecttypecode");
 				cRMFormModel.Name = "FormName: " + form.GetAttributeValue<string>("name");
-
+				var _formType =  form.GetAttributeValue<OptionSetValue>("type");
+				if (_formType != null)
+					cRMFormModel.FormType = "Type: " + GetCRMFormType(_formType.Value);
 			}
 			return cRMFormModel;
-
 		}
 
+		string GetCRMFormType(int formType)
+		{
+			string type = "";
+
+			switch (formType)
+			{
+				case 0:
+					type = "Dashboard";
+					break;
+
+				case 1:
+					type = "AppointmentBook";
+					break;
+
+				case 2:
+					type = "Main";
+					break;
+
+				case 3:
+					type = "MiniCampaignBO";
+					break;
+
+				case 4:
+					type = "Preview";
+					break;
+
+				case 5:
+					type = "Mobile - Express";
+					break;
+
+				case 6:
+					type = "Quick View Form";
+					break;
+				case 7:
+					type = "Quick Create";
+					break;
+				case 8:
+					type = "Dialog";
+					break;
+				case 9:
+					type = "Task Flow Form";
+					break;
+				case 10:
+					type = "InteractionCentricDashboard";
+					break;
+				case 11:
+					type = "Card";
+					break;
+				case 12:
+					type = "Main - Interactive experience";
+					break;
+				case 13:
+					type = "Contextual Dashboard";
+					break;
+				case 100:
+					type = "Other";
+					break;
+				case 101:
+					type = "MainBackup";
+					break;
+				case 102:
+					type = "AppointmentBookBackup";
+					break;
+				case 103:
+					type = "Power BI Dashboard";
+					break;
+
+
+			}
+
+			return type;
+		}
 	}
 }

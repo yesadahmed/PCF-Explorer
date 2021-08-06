@@ -2,9 +2,11 @@
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PCf_Explorer_Sol.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +43,7 @@ namespace PCf_Explorer_Sol.Manager
 					"compatibledatatypes", "createdon", "version", "createdby", "name");
 
 				LinkEntity EntityB = new LinkEntity("customcontrol", "solution", "solutionid", "solutionid", JoinOperator.Inner);
-				EntityB.Columns = new ColumnSet("uniquename");
+				EntityB.Columns = new ColumnSet("uniquename", "ismanaged", "friendlyname", "version");
 				EntityB.EntityAlias = "EntitySol";
 
 				query.LinkEntities.Add(EntityB);
@@ -53,6 +55,8 @@ namespace PCf_Explorer_Sol.Manager
 				query.LinkEntities.Add(EntityC);
 
 				query.Criteria.Conditions.Add(new ConditionExpression("compatibledatatypes", ConditionOperator.NotEqual, ""));
+				query.Orders.Add(new Microsoft.Xrm.Sdk.Query.OrderExpression("createdon", Microsoft.Xrm.Sdk.Query.OrderType.Descending));
+
 
 				var result = crmservice.RetrieveMultiple(query);
 
@@ -62,7 +66,44 @@ namespace PCf_Explorer_Sol.Manager
 					pCFModel.clientjsonraw = entity.GetAttributeValue<string>("clientjson");
 
 					if (!string.IsNullOrWhiteSpace(pCFModel.clientjsonraw))
+					{
 						pCFModel.ClientJson = JsonConvert.DeserializeObject<PCFClientJsonModel>(pCFModel.clientjsonraw);
+						
+						var createdby = entity.GetAttributeValue<AliasedValue>("EntityUser.fullname");
+						if (createdby != null)
+							pCFModel.createdbyName = Convert.ToString(createdby.Value);
+
+						if (pCFModel.ClientJson != null)
+						{
+							
+							var solName = entity.GetAttributeValue<AliasedValue>("EntitySol.uniquename");
+							var ismanaged = entity.GetAttributeValue<AliasedValue>("EntitySol.ismanaged");
+							var friendlyname = entity.GetAttributeValue<AliasedValue>("EntitySol.friendlyname");
+							var version = entity.GetAttributeValue<AliasedValue>("EntitySol.version");
+
+
+							if (solName != null)
+								pCFModel.SolutionName = Convert.ToString(solName.Value);
+
+							if (ismanaged != null)
+								pCFModel.ClientJson.ismanaged = Convert.ToBoolean(ismanaged.Value);
+
+							if (friendlyname != null)
+								pCFModel.ClientJson.friendlyname = Convert.ToString(friendlyname.Value);
+
+
+							if (version != null)
+								pCFModel.ClientJson.version = Convert.ToString(version.Value);
+
+							pCFModel.ClientJson.SolutionName = pCFModel.SolutionName;
+							pCFModel.ClientJson.createdbyName = pCFModel.createdbyName;
+
+
+						}
+
+					}
+
+
 
 					pCFModel.name = entity.GetAttributeValue<string>("name");
 
@@ -75,16 +116,15 @@ namespace PCf_Explorer_Sol.Manager
 					else
 						pCFModel.IsFieldtype = true;
 
-					var createdby = entity.GetAttributeValue<AliasedValue>("EntityUser.fullname");
-					if (createdby != null)
-						pCFModel.createdbyName = Convert.ToString(createdby.Value);
+
 
 					pCFModel.createdon = entity.GetAttributeValue<DateTime>("createdon");
 					pCFModel.customcontrolid = entity.Id;
 					pCFModel.solutionid = entity.GetAttributeValue<Guid>("solutionid");
-					var solName = entity.GetAttributeValue<AliasedValue>("EntitySol.uniquename");
-					if (solName != null)
-						pCFModel.SolutionName = Convert.ToString(solName.Value);
+
+
+
+
 					pCFModel.version = entity.GetAttributeValue<string>("version");
 					lst.Add(pCFModel);
 				}
