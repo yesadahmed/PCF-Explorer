@@ -22,7 +22,7 @@ Once you have the xrmtoolbox you need to install this plugin form Tool Library a
 ![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PowerAutomateManagerDocs/main/Plugin.PNG)
 
 Once the installion is done, you will see this plugin as follows:
-![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PowerAutomateManagerDocs/main/readme/pane.PNG)
+![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/control.PNG)
 
 Since this plugin connects to CE webapi so by default it requires **OAuth or Certifcate** type connections in xrmtoolbox.
 <br/>For example regarding available OAuth connections in xrmtools are mentioned below:
