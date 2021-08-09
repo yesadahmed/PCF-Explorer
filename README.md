@@ -36,3 +36,11 @@ Some examples are as follows.
 ![xrmtoolbox connections](https://github.com/yesadahmed/xrmtoolboxAddins/blob/main/JsonToCSharp/images/conneciont.PNG)
  AuthType=OAuth;Username=jsmith@contoso.onmicrosoft.com; Password=passcode;
 Url=https://contoso:8080/Test;AppId=<GUID>;RedirectUri=app://<GUID>; LoginPrompt=Never
+
+ 
+ Feel free to express for new features you want and any improvents you thought of.
+I will try to address as soon as possible.<br/>
+You can riase new issues/fearures on (https://github.com/yesadahmed/PCF-Explorer/issues)
+<br/>
+**Adnan Samuel**  
+   
