@@ -11,6 +11,7 @@ namespace PCf_Explorer_Sol
 {
 	// Do not forget to update version number and author (company attribute) in AssemblyInfo.cs class
 	// To generate Base64 string for Images below, you can use https://www.base64-image.de/
+	//https://github.com/yesadahmed/PCF-Explorer
 	[Export(typeof(IXrmToolBoxPlugin)),
 		ExportMetadata("Name", "PCF-Explorer"),
 		ExportMetadata("Description", "A tool to explore PCF control dependencies (properties, dataset, resources, entities and solution). Works with OAUTH/Certifcate Connection."),

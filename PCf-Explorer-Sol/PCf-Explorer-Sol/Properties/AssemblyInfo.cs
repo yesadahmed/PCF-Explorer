@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PCf-Explorer-Sol")]
-[assembly: AssemblyDescription("To explore PCF properties and dependencies in customer engagement.")]
+[assembly: AssemblyDescription("A tool to explore PCF dependencies(type, resources, properties, solution, forms, dashboard and entity) in customer engagement.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Adnan Samuel")]
-[assembly: AssemblyProduct("PCf-Explorer")]
+[assembly: AssemblyProduct("PCF-Explorer")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
