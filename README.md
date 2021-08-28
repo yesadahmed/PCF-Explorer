@@ -19,7 +19,7 @@ More detial please see below.<br/>
  
  ## How to Connect in xrmtoolbox (connection Types)
 Once you have the xrmtoolbox you need to install this plugin form Tool Library as shown below.<br/>
-![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PowerAutomateManagerDocs/main/Plugin.PNG)
+![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/tool.PNG)
 
 Once the installion is done, you will see this plugin as follows:
 ![xrmtoolbox connections](https://raw.githubusercontent.com/yesadahmed/PCF-Explorer/main/control.PNG)
